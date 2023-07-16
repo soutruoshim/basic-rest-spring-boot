@@ -1,5 +1,6 @@
 package com.srhdp.basicrestspringboot.service;
 
+import com.srhdp.basicrestspringboot.error.EmployeeNotFoundException;
 import com.srhdp.basicrestspringboot.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee getEmployeeById(String id) {
-        return employees.stream().filter(employee -> employee.getEmployeeId().equals(id)).findFirst().get();
+        return employees
+                .stream()
+                .filter(employee -> employee.getEmployeeId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException(""+"Employee not found with id:"+id));
     }
 }
