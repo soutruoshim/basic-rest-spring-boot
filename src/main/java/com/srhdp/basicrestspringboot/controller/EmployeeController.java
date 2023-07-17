@@ -3,19 +3,18 @@ package com.srhdp.basicrestspringboot.controller;
 import com.srhdp.basicrestspringboot.model.Employee;
 import com.srhdp.basicrestspringboot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("v1/employees")
 public class EmployeeController {
+
+    @Qualifier("employeeServiceImpl")
     @Autowired
     private EmployeeService employeeService;
-
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @PostMapping
     public Employee save(@RequestBody Employee employee){
